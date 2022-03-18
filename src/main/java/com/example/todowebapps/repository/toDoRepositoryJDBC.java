@@ -17,9 +17,26 @@ public class toDoRepositoryJDBC implements toDoRepository{
 
     @Override
     public List<toDoDTO> listToDo() {
-        String sql = "SELECT * FROM things_to_do ";
-
+        String sql = "SELECT tTitle, tDesc FROM things_to_do ";
         return jdbcTemplate.query(sql, new toDoMapper());
-
     }
+
+    @Override
+    public List<toDoDTO> sortToDoTitle(){
+        String sql = "SELECT tTitle, tDesc FROM things_to_do";
+        return jdbcTemplate.query(sql, new toDoMapper());
+    }
+
+    @Override
+    public List<toDoDTO> sortComplete() {
+        String sql = "SELECT tTitle, tDesc FROM things_to_do WHERE tComplete = TRUE ";
+        return jdbcTemplate.query(sql, new toDoMapper());
+    }
+
+    @Override
+    public List<toDoDTO> sortUnComplete() {
+        String sql = "SELECT tTitle, tDesc FROM things_to_do WHERE tComplete = FALSE";
+        return jdbcTemplate.query(sql, new toDoMapper());
+    }
+
 }
